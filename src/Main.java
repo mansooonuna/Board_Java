@@ -6,11 +6,14 @@ public class Main {
         System.out.println("== 게시판 v 0.1 ==");
         System.out.println("== 프로그램 시작 ==");
 
+
         Scanner scanner = new Scanner(System.in);
 
         int articleId = 1;
         Article lastArticle = null;
         ArrayList<Article> articles = new ArrayList<>();
+        test(articles);
+
 
         while (true) {
             System.out.print("명령) ");
@@ -32,10 +35,9 @@ public class Main {
                 Article article = new Article(articleId, title, body);
                 lastArticle = article;
                 articles.add(article);
-
-                System.out.println(articleId + "번 게시물이 등록되었습니다.");
-
                 articleId++;
+
+                System.out.println(lastArticle.articleid + "번 게시물이 등록되었습니다.");
 
 
             } else if (input.equals("/usr/article/detail")) {
@@ -62,10 +64,11 @@ public class Main {
                 System.out.println("_________________");
                 System.out.println("  글번호 / 제 목 ");
                 System.out.println("-----------------");
-                for (Article article : articles) {
+
+                for (int i = articles.size()-1; i >= 0; i--) {
+                    Article article = articles.get(i);
                     System.out.println("    " + article.articleid + "     " + article.title);
                 }
-
 
             } else if (input.equals("/usr/article/modify")) {
 
@@ -74,6 +77,14 @@ public class Main {
             } else {
                 System.out.println("입력된 명령어 : " + input);
             }
+
+        }
+    }
+
+    public static void test(ArrayList<Article> testArticles) {
+
+        for (int i = 1; i <= 100; i++) {
+            testArticles.add(new Article(i, "제목" + i, "내용" + i));
 
         }
     }
