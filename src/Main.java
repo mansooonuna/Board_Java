@@ -7,7 +7,9 @@ public class Main {
 
         Scanner scanner = new Scanner(System.in);
 
-        int articleId = 0;
+        int articleId = 1;
+        Article lastArticle = null;
+
         while (true) {
             System.out.print("명령) ");
             String input = scanner.nextLine();
@@ -25,12 +27,25 @@ public class Main {
                 String body = scanner.nextLine();
 
                 Article article = new Article(articleId, title, body);
-                articleId++;
+                lastArticle = article;
                 System.out.println(articleId + "번 게시물이 등록되었습니다.");
+
+                articleId++;
 
             } else if (input.equals("/usr/article/list")) {
 
             } else if (input.equals("/usr/article/detail")) {
+                if (lastArticle == null) {
+                    System.out.println("게시물이 존재하지 않습니다.");
+                    continue;
+                }
+
+                Article article = lastArticle;
+
+                System.out.println("- 최근 게시물 상세보기 -");
+                System.out.println("글번호 : " + article.articleid);
+                System.out.println("제목 : " + article.title);
+                System.out.println("내용 : " + article.body);
 
             } else if (input.equals("/usr/article/modify")) {
 
