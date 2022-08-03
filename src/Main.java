@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
@@ -9,17 +10,19 @@ public class Main {
 
         int articleId = 1;
         Article lastArticle = null;
+        ArrayList<Article> articles = new ArrayList<>();
 
         while (true) {
             System.out.print("명령) ");
             String input = scanner.nextLine();
 
+
             if (input.equals("exit")) {
                 System.out.println("== 프로그램 종료 ==");
                 break;
 
-            } else if (input.equals("/usr/article/write")) {
 
+            } else if (input.equals("/usr/article/write")) {
                 System.out.println("- 게시물 등록 -");
                 System.out.print("제목 : ");
                 String title = scanner.nextLine();
@@ -28,15 +31,16 @@ public class Main {
 
                 Article article = new Article(articleId, title, body);
                 lastArticle = article;
+                articles.add(article);
+
                 System.out.println(articleId + "번 게시물이 등록되었습니다.");
 
                 articleId++;
 
-            } else if (input.equals("/usr/article/list")) {
 
             } else if (input.equals("/usr/article/detail")) {
                 if (lastArticle == null) {
-                    System.out.println("게시물이 존재하지 않습니다.");
+                    System.out.println("* 게시물이 존재하지 않습니다.");
                     continue;
                 }
 
@@ -46,6 +50,22 @@ public class Main {
                 System.out.println("글번호 : " + article.articleid);
                 System.out.println("제목 : " + article.title);
                 System.out.println("내용 : " + article.body);
+
+
+            } else if (input.equals("/usr/article/list")) {
+                if (articles.size() == 0) {
+                    System.out.println("* 게시물이 존재하지 않습니다.");
+                    continue;
+                }
+
+                System.out.println("- 모든 게시물 목록보기 -");
+                System.out.println("_________________");
+                System.out.println("  글번호 / 제 목 ");
+                System.out.println("-----------------");
+                for (Article article : articles) {
+                    System.out.println("    " + article.articleid + "     " + article.title);
+                }
+
 
             } else if (input.equals("/usr/article/modify")) {
 

@@ -10,6 +10,6 @@ public class Article {
 
     @Override
     public String toString() {
-        return String.format("{글번호 : %d, 제목 : %s, 내용: %s", articleid, title, body);
+        return String.format("{글번호 : %d, 제목 : %s, 내용: %s}", articleid, title, body);
     }
 }
